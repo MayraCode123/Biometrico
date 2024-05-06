@@ -83,27 +83,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-lg-12 order-lg-1">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="example" class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Nombre usuario</th>
-                                    <th>Dias</th>
-                                    <th>Observacion</th>
-                                    <th>estado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
 
-                            </tbody>
-                        </table>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
 
             </div>
         </div>
