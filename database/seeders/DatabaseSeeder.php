@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
         UnidadSeeder::class,
         DateSeeder::class,
         DataSeeder::class,
-        HorarioSeeder::class,
-        DataHorarioSeeder::class,
+        // HorarioSeeder::class,
+        //DataHorarioSeeder::class,
 
         // ...
     ]);

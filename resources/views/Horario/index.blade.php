@@ -83,33 +83,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12 order-lg-1">
+            {{-- <div class="col-lg-12 order-lg-1">
                 <div class="card shadow">
                     <div class="card-body">
-
-                        <div class="input-daterange datepicker row align-items-center" data-date-format="yyyy-mm-dd">
-                            <div class="col">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Fecha inicio" type="text" value="{{$start}}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Fecha Fin" type="text" value="{{$end}}">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-bordered">
                             <thead>
@@ -121,21 +97,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($data as $data)
-                                    <tr>
-                                        <td>{{$data->name}}</td>
-                                        <td>{{$data->time}}</td>
-                                        <td>{{$data->state}}</td>
-                                        <td>{{$data->type}}</td>
-                                    </tr>
-                                @endforeach
 
                             </tbody>
                         </table>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             </div>
         </div>

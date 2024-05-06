@@ -14,12 +14,15 @@ return new class extends Migration
         Schema::create('horario', function (Blueprint $table) {
 
             $table->id();
-            $table->string('tipo');
-            $table->time('time_i');
-            $table->time('time_f');
-            $table->string('state');
-            $table->unsignedBigInteger('date_id');
-            $table->foreign('date_id')->references('id')->on('date')->onDelete('cascade');
+            $table->string('name');
+            $table->time('min_hr_entrada');
+            $table->time('hr_entrada');
+            $table->time('hr_entrada_min_tolerancia');
+            $table->time('hr_entrada_min_retraso');
+            $table->time('hr_salida');
+            $table->time('hr_min_salida');
+            // $table->unsignedBigInteger('date_id');
+            // $table->foreign('date_id')->references('id')->on('date')->onDelete('cascade');
             $table->timestamps();
         });
     }

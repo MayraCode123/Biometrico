@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('data_horario', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('data_id');
+            $table->unsignedBigInteger('unidad_id');
             $table->unsignedBigInteger('horario_id');
             // Aquí puedes agregar otras columnas si es necesario
 
             // Definir las claves foráneas
-            $table->foreign('data_id')->references('id')->on('data')->onDelete('cascade');
+            $table->foreign('unidad_id')->references('id')->on('unidad')->onDelete('cascade')->update('cascade');
             $table->foreign('horario_id')->references('id')->on('horario')->onDelete('cascade');
         });
     }

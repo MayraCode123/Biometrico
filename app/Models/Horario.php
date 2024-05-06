@@ -12,10 +12,12 @@ class Horario extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     protected $fillable = [
-        'tipo',
-        'time-i',
-        'time-f',
-        'state',
-        'date_id'
+        'name',
+        'min_hr_entrada',
+        'hr_entrada',
+        'hr_entrada_min_tolerancia',
+        'hr_entrada_min_retraso',
+        'hr_salida',
+        'hr_min_salida'
     ];
 }
