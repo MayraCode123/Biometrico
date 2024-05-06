@@ -16,6 +16,7 @@
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
+
     <!-- Styles -->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
@@ -33,7 +34,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            <div class="sidebar-brand-text mx-3">BIOMETRICO</div>
         </a>
 
         <!-- Divider -->
@@ -58,6 +59,23 @@
             <a class="nav-link" href="{{ route('profile') }}">
                 <i class="fas fa-fw fa-user"></i>
                 <span>{{ __('Profile') }}</span>
+            </a>
+        </li>
+        <li class="nav-item {{ Nav::isRoute('personal') }}">
+            <a class="nav-link" href="{{ route('personal') }}">
+                <i class="fas fa-fw fa-users"></i>
+                <span>{{ __('Personal') }}</span></a>
+        </li>
+        <li class="nav-item {{ Nav::isRoute('data') }}">
+            <a class="nav-link" href="{{ route('data') }}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>{{ __('Data') }}</span></a>
+        </li>
+
+        <li class="nav-item {{ Nav::isRoute('horario') }}">
+            <a class="nav-link" href="{{ route('horario') }}">
+                <i class="fas fa-fw fa-hands-helping"></i>
+                <span>{{ __('Horario') }}</span>
             </a>
         </li>
 
@@ -108,25 +126,6 @@
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
 
-                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                    <li class="nav-item dropdown no-arrow d-sm-none">
-                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-search fa-fw"></i>
-                        </a>
-                        <!-- Dropdown - Messages -->
-                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                            <form class="form-inline mr-auto w-100 navbar-search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button">
-                                            <i class="fas fa-search fa-sm"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
 
 
 
@@ -141,7 +140,7 @@
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="{{ route('profile') }}">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                {{ __('Profile') }}
+                                {{ __('Perfil') }}
                             </a>
 
                             <div class="dropdown-divider"></div>
@@ -215,5 +214,37 @@
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+
+<!-- JavaScript de jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap Datepicker JS -->
+<script src="{{ asset('js/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+
+<script src="{{ asset('js/data-table.js') }}"></script>
+<script>
+$(document).ready(function(){
+    $('#crearUsuario').submit(function(event){
+        event.preventDefault();
+        var formData = $(this).serializeArray();
+        $.ajax({
+            url: "{{ route('personal.store') }}",
+            method: "POST",
+            data: formData,
+            success: function(response){
+                window.location.href = "{{route('personal')}}";
+            },
+            error: function(xhr, status, error){
+                console.log('Error al guardar:', error);
+            }
+        });
+    });
+});
+</script>
+
 </body>
 </html>
