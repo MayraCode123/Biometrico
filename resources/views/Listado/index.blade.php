@@ -12,6 +12,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Id Biometrico</th>
                         <th>Nombre usuario</th>
                         <th>Tiempo</th>
                         <th>Estado</th>
@@ -23,6 +24,7 @@
                     @foreach ($data as $data)
                         <tr>
                             <td>{{$data->id}}</td>
+                            <td>{{$data->id_biometrico}}</td>
                             <td>{{$data->name}}</td>
                             <td>{{$data->time}}</td>
                             <td>{{$data->state}}</td>

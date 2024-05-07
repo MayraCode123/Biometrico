@@ -68,13 +68,13 @@
         </li>
         <li class="nav-item {{ Nav::isRoute('data') }}">
             <a class="nav-link" href="{{ route('data') }}">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa-fw fa-list-check"></i>
                 <span>{{ __('Data') }}</span></a>
         </li>
 
         <li class="nav-item {{ Nav::isRoute('horario') }}">
             <a class="nav-link" href="{{ route('horario') }}">
-                <i class="fas fa-fw fa-hands-helping"></i>
+                <i class="fas fa-fw fa-clock"></i>
                 <span>{{ __('Horario') }}</span>
             </a>
         </li>

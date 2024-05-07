@@ -83,8 +83,33 @@
                     </div>
                 </div>
             </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="example" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Hora de entrada</th>
+                            <th>Hora de Salida</th>
+                            <th>observaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
+                        <tr>
+                            <th>c</th>
+                            <th>cd</th>
+                            <th>12</th>
+                            <th>123S</th>
+                        </tr>
+
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
