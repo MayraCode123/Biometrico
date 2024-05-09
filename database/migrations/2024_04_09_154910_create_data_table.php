@@ -12,15 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('data', function (Blueprint $table) {
-            $table->bigIncrements('id'); // Define id como llave primaria autoincremental
-            $table->unsignedBigInteger('id_biometrico'); // Define id_biometrico como una columna regular
+            $table->bigIncrements('id'); // Define id como contador
+            $table->unsignedBigInteger('id_biometrico')->index(); // Define id_biometrico como una columna regular
             $table->string('name');
             $table->dateTime('time');
             $table->string('state');
             $table->string('type');
             $table->integer('type_register');
-            $table->timestamps();
-            // Define una clave primaria compuesta usando id y id_biometrico
+
+            // Definir una clav e primaria compuesta
             $table->primary(['id', 'id_biometrico']);
         });
     }

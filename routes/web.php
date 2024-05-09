@@ -43,4 +43,6 @@ Route::controller(HorarioController::class)->group(function(){
     Route::get('/horario', 'index')->name('horario');
 
 });
+Route::get('/fechas', 'FechaController@index')->name('fechas.index');
+
 

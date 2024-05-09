@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('data_horario', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('data_id');
+            $table->unsignedBigInteger('data_id_biometrico'); // Cambiar el nombre de la columna para reflejar la relación
             $table->unsignedBigInteger('horario_id');
 
-            $table->foreign('data_id')->references('id')->on('data');
+            $table->foreign('data_id_biometrico')->references('id_biometrico')->on('data'); // Hacer referencia a la columna correcta
             $table->foreign('horario_id')->references('id')->on('horario');
             $table->timestamps();
         });
