@@ -13,13 +13,29 @@ class data_horarioSeeder extends Seeder
      */
     public function run(): void
     {
-        $data = [
+        $data_horario = [
             [
-                'id'=>1,
-                'horario_id'=>1,
-                'data_id'=>1,
+                'id' => 1,
+                'data_id_biometrico' => 4,
+                'horario_id' => 1,
             ],
+            [
+                'id' => 2, // Cambia el valor de id para que sea único
+                'data_id_biometrico' => 4,
+                'horario_id' => 2,
+            ],
+            [
+                'id' => 3,
+                'data_id_biometrico' => 5,
+                'horario_id' => 1,
+            ],
+            [
+                'id' => 4, // Cambia el valor de id para que sea único
+                'data_id_biometrico' => 5,
+                'horario_id' => 2,
+            ],
+
         ];
-        DB::table('data_horario')->insert($data);
+        DB::table('data_horario')->insert($data_horario);
     }
 }

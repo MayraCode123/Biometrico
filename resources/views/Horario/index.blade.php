@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 
 @section('main-content')
+<?php
+$n = 1;
+?>
 <div class="col-lg-12 order-lg-1">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -93,23 +96,110 @@
                 <table id="example" class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Hora de entrada</th>
-                            <th>Hora de Salida</th>
-                            <th>observaciones</th>
+                            <th>Fecha</th>
+                            <th>Nombre completo</th>
+                            <th>Hora Mañana Entrada</th>
+                            <th>Hora Manana Salida</th>
+                            <th>Hora Tarde Salida</th>
+                            <th>Hora tarde Salida</th>
+                            <th>Observacion</th>
                         </tr>
                     </thead>
                     <tbody>
-
+                        @foreach ($registros as $datos)
                         <tr>
-                            <th>c</th>
-                            <th>cd</th>
-                            <th>12</th>
-                            <th>123S</th>
+                            <td>{{$datos->fecha}}</td>
+                            <td>{{$datos->nombre_usuario}}</td>
+                            <td>
+                                @php
+                                $en_rango = false;
+                                $horas = []; // Array para almacenar las horas dentro del rango
+                                @endphp
+                                @foreach(explode(',', $datos->estados) as $estado)
+                                    @php
+                                    list($hora, $estado_text) = explode(' - ', $estado);
+                                    @endphp
+                                    @if (strtotime($hora) >= strtotime('07:00:00') && strtotime($hora) <= strtotime('09:00:00'))
+                                        @php
+                                        $horas[] = $hora; // Almacenar la hora dentro del rango
+                                        $en_rango = true;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                @if ($en_rango)
+                                    {{ implode(', ', $horas) }} {{-- Mostrar las horas dentro del rango --}}
+                                @else
+                                    No hay registro
+                                @endif
+                            </td>
+                            <td>
+                                @php
+                                $en_rango = false;
+                                $horas = []; // Array para almacenar las horas dentro del rango
+                                @endphp
+                                @foreach(explode(',', $datos->estados) as $estado)
+                                    @php
+                                    list($hora, $estado_text) = explode(' - ', $estado);
+                                    @endphp
+                                    @if (strtotime($hora) >= strtotime('12:00:00') && strtotime($hora) <= strtotime('13:00:00'))
+                                        @php
+                                        $horas[] = $hora; // Almacenar la hora dentro del rango
+                                        $en_rango = true;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                @if ($en_rango)
+                                    {{ implode(', ', $horas) }} {{-- Mostrar las horas dentro del rango --}}
+                                @else
+                                    No hay registro
+                                @endif</td>
+                            <td>@php
+                                $en_rango = false;
+                                $horas = []; // Array para almacenar las horas dentro del rango
+                                @endphp
+                                @foreach(explode(',', $datos->estados) as $estado)
+                                    @php
+                                    list($hora, $estado_text) = explode(' - ', $estado);
+                                    @endphp
+                                    @if (strtotime($hora) >= strtotime('14:00:00') && strtotime($hora) <= strtotime('15:00:00'))
+                                        @php
+                                        $horas[] = $hora; // Almacenar la hora dentro del rango
+                                        $en_rango = true;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                @if ($en_rango)
+                                    {{ implode(', ', $horas) }} {{-- Mostrar las horas dentro del rango --}}
+                                @else
+                                    No hay registro
+                                @endif</td>
+                            <td>
+                                @php
+                                $en_rango = false;
+                                $horas = []; // Array para almacenar las horas dentro del rango
+                                @endphp
+                                @foreach(explode(',', $datos->estados) as $estado)
+                                    @php
+                                    list($hora, $estado_text) = explode(' - ', $estado);
+                                    @endphp
+                                    @if (strtotime($hora) >= strtotime('18:30:00') && strtotime($hora) <= strtotime('20:00:00'))
+                                        @php
+                                        $horas[] = $hora; // Almacenar la hora dentro del rango
+                                        $en_rango = true;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                @if ($en_rango)
+                                    {{ implode(', ', $horas) }} {{-- Mostrar las horas dentro del rango --}}
+                                @else
+                                    No hay registro
+                                @endif
+                            </td>
+                            <td>En proceso ..</td>
                         </tr>
-
+                        @endforeach
                     </tbody>
-                </table>
+                    </table>
             </div>
         </div>
     </div>

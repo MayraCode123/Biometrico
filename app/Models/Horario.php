@@ -20,4 +20,8 @@ class Horario extends Model
         'hr_salida',
         'hr_min_salida'
     ];
+    public function data()
+    {
+        return $this->belongsToMany(Data::class, 'data_horario', 'horario_id', 'data_id_biometrico');
+    }
 }

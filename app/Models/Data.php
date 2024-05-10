@@ -19,4 +19,14 @@ class Data extends Model
         'type',
         'type_register'
     ];
+
+    // Relación muchos a muchos con Horario a través de DataHorario
+    public function horarios()
+    {
+        return $this->belongsToMany(Horario::class, 'data_horario', 'data_id_biometrico', 'horario_id');
+    }
+    public function personal()
+    {
+        return $this->belongsToMany(Personal::class, 'data_personal');
+    }
 }

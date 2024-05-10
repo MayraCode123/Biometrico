@@ -72,7 +72,7 @@ aria-hidden="true">
                         <div class="col-lg-6">
                             <div class="form-group focused">
                                 <label class="form-control-label" for="last_name">Nombre de usuario<span class="small text-danger">*</span></label>
-                                <select name="data_id" id="data" class="form-control">
+                                <select name="data_personal_id" id="data" class="form-control">
                                     <option value="">Seleccione una opción</option>
                                 @foreach ($data as $dato)
                                     <option value="{{ $dato->id_biometrico }}">{{ $dato->name }}</option>

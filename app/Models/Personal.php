@@ -15,6 +15,11 @@ class Personal extends Model
         'nombre',
         'data_id',
         'area_id',
-        'unidad_id'
+        'unidad_id',
+        'data_personal_id'
     ];
+    public function data()
+    {
+        return $this->belongsToMany(Data::class, 'data_personal');
+    }
 }
