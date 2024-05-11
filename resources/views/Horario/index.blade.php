@@ -136,24 +136,36 @@ $n = 1;
                                 @php
                                 $en_rango = false;
                                 $horas = []; // Array para almacenar las horas dentro del rango
-                                @endphp
-                                @foreach(explode(',', $datos->estados) as $estado)
-                                    @php
+                                $hora_fuera_de_rango = null; // Variable para almacenar la primera hora fuera del rango
+                                $hora_salida = null; // Variable para almacenar la hora de salida si está fuera del rango
+                            @endphp
+
+                            @foreach(explode(',', $datos->estados) as $estado)
+                                @php
                                     list($hora, $estado_text) = explode(' - ', $estado);
-                                    @endphp
-                                    @if (strtotime($hora) >= strtotime('12:00:00') && strtotime($hora) <= strtotime('13:00:00'))
-                                        @php
+                                    if (strtotime($hora) >= strtotime('12:00:00') && strtotime($hora) <= strtotime('13:00:00')) {
                                         $horas[] = $hora; // Almacenar la hora dentro del rango
                                         $en_rango = true;
-                                        @endphp
-                                    @endif
-                                @endforeach
-                                @if ($en_rango)
-                                    {{ implode(', ', $horas) }} {{-- Mostrar las horas dentro del rango --}}
-                                @else
-                                    No hay registro
-                                @endif</td>
-                            <td>@php
+                                    } elseif (strtotime($hora) >= strtotime('09:00:00') && strtotime($hora) <= strtotime('11:59:59')) {
+                                        $hora_salida = $hora; // Almacenar la hora de salida si está fuera del rango
+                                    } elseif (!$hora_fuera_de_rango) {
+                                        $hora_fuera_de_rango = $hora; // Almacenar la primera hora fuera del rango
+                                    }
+                                @endphp
+                            @endforeach
+
+                            @if ($en_rango)
+                                {{ implode(', ', $horas) }} {{-- Mostrar las horas dentro del rango --}}
+                            @elseif ($hora_salida)
+                            <span class="badge badge-danger">{{ $hora_salida }}</span>  {{-- Mostrar la hora de salida en rojo --}}
+
+                            @else
+                                No hay registro
+                            @endif
+
+                            </td>
+                            <td>
+                                @php
                                 $en_rango = false;
                                 $horas = []; // Array para almacenar las horas dentro del rango
                                 @endphp
