@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
         HorarioSeeder::class,
         data_horarioSeeder::class,
         DataPersonalSeeder::class,
-        PersonalSeeder::class
+        CargoSeeder::class,
+        PersonalSeeder::class,
     ]);
 
 

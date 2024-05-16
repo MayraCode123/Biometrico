@@ -19,15 +19,16 @@ class PersonalSeeder extends Seeder
                 'name' => 'Fernando Flores',
                 'area_id' => 4,
                 'unidad_id' => 2,
-                'data_personal_id' => 4 //estamos llamando al id del biometrico del data
+                'data_personal_id' => 4, //estamos llamando al id del biometrico del data
+                'cargo_id' => 1
             ],
             [
                 'id' => 2, // Specify unique IDs or use auto-increment
                 'name' => 'Maria jose',
                 'area_id' => 3,
                 'unidad_id' => 2,
-                'data_personal_id' => 5
-
+                'data_personal_id' => 5,
+                'cargo_id' => 2
             ],
         ];
         DB::table('personal')->insert($personal);

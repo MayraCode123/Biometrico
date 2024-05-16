@@ -38,11 +38,11 @@ Route::get('/datos_biometrico','DataController@index')->name('data');
 Route::controller(PersonalController::class)->group(function(){
     Route::get('/personal', 'index')->name('personal');
     Route::post('/store','store')->name('personal.store');
+    Route::get('/personal_lista/{id}','lista')->name('personal.lista');
 });
 Route::controller(HorarioController::class)->group(function(){
     Route::get('/horario', 'index')->name('horario');
 
-});
-Route::get('/fechas', 'FechaController@index')->name('fechas.index');
 
+});
 

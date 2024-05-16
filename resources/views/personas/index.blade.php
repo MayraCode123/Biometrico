@@ -34,6 +34,7 @@
                                     <td>{{$datos->area_name}}</td>
                                     <td>{{$datos->unidad_name}}</td>
                                     <td>
+                                        <a href="{{route('personal.lista',$datos->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-fw fa-eye"></i></a>
                                         <a href="" class="btn btn-warning btn-sm">Editar</a>
                                         <a href="" class="btn btn-danger btn-sm">Eliminar</a>
                                     </td>
@@ -83,7 +84,7 @@ aria-hidden="true">
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             <div class="form-group focused">
                                 <label class="form-control-label" for="name">Area<span class="small text-danger">*</span></label>
                                 <select name="area_id" id="area" class="form-control">
@@ -94,13 +95,24 @@ aria-hidden="true">
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             <div class="form-group focused">
                                 <label class="form-control-label" for="last_name">Unidad<span class="small text-danger">*</span></label>
                                 <select name="unidad_id" id="unidad" class="form-control">
                                     <option value="">Seleccione una opción</option>
                                     @foreach ($unidad as $unidad)
                                     <option value="{{ $unidad->id }}">{{ $unidad->name }}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group focused">
+                                <label class="form-control-label" for="last_name">Cargo<span class="small text-danger">*</span></label>
+                                <select name="cargo_id" id="cargo" class="form-control">
+                                    <option value="">Seleccione una opción</option>
+                                    @foreach ($cargo as $cargo)
+                                    <option value="{{ $cargo->id }}">{{ $cargo->name }}</option>
                                 @endforeach
                                 </select>
                             </div>

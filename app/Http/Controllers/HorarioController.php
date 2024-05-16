@@ -14,10 +14,19 @@ use Carbon\Carbon;
 class HorarioController extends Controller
 {
     public function index(Request $request){
+
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+
         $registros = DB::table('personal')
         ->join('data_personal', 'data_personal.data_id_biometrico', '=', 'personal.data_personal_id')
         ->join('data', 'data.id_biometrico', '=', 'data_personal.data_id_biometrico')
-        ->selectRaw('DATE(data.time) as fecha, data.name as nombre_usuario, GROUP_CONCAT(CONCAT(TIME(data.time), " - ", data.state) ORDER BY TIME(data.time)) as estados')
+        ->selectRaw('DATE(data.time) as fecha, data.name as nombre_usuario,
+        GROUP_CONCAT(CONCAT(TIME(data.time), " - ", data.state)
+        ORDER BY TIME(data.time)) as estados')
+        ->when($fechaInicio && $fechaFin, function ($query) use ($fechaInicio, $fechaFin) {
+            $query->whereBetween(DB::raw('DATE(data.time)'), [$fechaInicio, $fechaFin]);
+        })
         ->groupBy(DB::raw('DATE(data.time)'), 'data.name')
         ->get();
 
@@ -118,5 +127,8 @@ class HorarioController extends Controller
     // }
 
     //return view('Horario.index',compact('registros'));
+    }
+    public function procesoCheck(){
+
     }
 }

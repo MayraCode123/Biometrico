@@ -16,7 +16,8 @@ class Personal extends Model
         'data_id',
         'area_id',
         'unidad_id',
-        'data_personal_id'
+        'data_personal_id',
+        'cargo_id'
     ];
     public function data()
     {

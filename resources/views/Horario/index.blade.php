@@ -93,6 +93,28 @@ $n = 1;
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form action="{{ route('horario') }}" method="GET">
+                            <div class="form-group">
+                                <label for="fecha_inicio">Fecha de inicio:</label>
+                                <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-control" value="{{ $fechaInicio ?? '' }}">
+                            </div>
+                    </div>
+                    <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="fecha_fin">Fecha de fin:</label>
+                                <input type="date" id="fecha_fin" name="fecha_fin" class="form-control" value="{{ $fechaFin ?? '' }}">
+                            </div>
+                    </div>
+                    <div class="col-md-4">
+                            <button type="submit" class="btn btn-success form-control">Filtrar</button>
+                        </form>
+                    </div>
+                </div>
+            </br>
+
+
                 <table id="example" class="table table-striped table-bordered">
                     <thead>
                         <tr>
@@ -139,11 +161,10 @@ $n = 1;
                                 $hora_fuera_de_rango = null; // Variable para almacenar la primera hora fuera del rango
                                 $hora_salida = null; // Variable para almacenar la hora de salida si está fuera del rango
                             @endphp
-
                             @foreach(explode(',', $datos->estados) as $estado)
                                 @php
                                     list($hora, $estado_text) = explode(' - ', $estado);
-                                    if (strtotime($hora) >= strtotime('12:00:00') && strtotime($hora) <= strtotime('13:00:00')) {
+                                    if (strtotime($hora) >= strtotime('12:00:00') && strtotime($hora) <= strtotime('14:00:00')) {
                                         $horas[] = $hora; // Almacenar la hora dentro del rango
                                         $en_rango = true;
                                     } elseif (strtotime($hora) >= strtotime('09:00:00') && strtotime($hora) <= strtotime('11:59:59')) {
@@ -184,7 +205,8 @@ $n = 1;
                                     {{ implode(', ', $horas) }} {{-- Mostrar las horas dentro del rango --}}
                                 @else
                                     No hay registro
-                                @endif</td>
+                                @endif
+                            </td>
                             <td>
                                 @php
                                 $en_rango = false;
