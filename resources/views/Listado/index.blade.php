@@ -4,8 +4,20 @@
 <div class="col-lg-12 order-lg-1">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Listado de personal</button></h6>
+            <h6 class="m-0 font-weight-bold text-primary">Listado de General</h6></br>
+
+            <form>
+                <div class="form-group">
+                    <div class="custom-file">
+                        <label class="custom-file-label" for="customFile">Subir archivo</label>
+                        <input type="file" class="custom-file-input" id="customFile">
+                    </div>
+                </div>
+            </form>
+
+
         </div>
+
         <div class="card-body">
             <div class="table-responsive">
                 <table id="example" class="table table-striped table-bordered">

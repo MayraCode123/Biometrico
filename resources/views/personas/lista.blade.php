@@ -3,12 +3,12 @@
 @section('main-content')
 <div class="col-lg-12 order-lg-1">
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h5 class="m-0 font-weight-bold text-secondary">Reporte Individual</h5>
+        <dv class="card-header py-3">
+            <h5 class="m-0 font-weight-bold text-secondary" style="text-align: center">Reporte Individual</h5>
             <h6 class="m-0 font-weight-bold text-primary">Nombre: {{$persona->name_personal}}</br>
             Cargo:{{$persona->name_cargo}}
-            </h6>
-        </div>
+            </h6></br>
+
         <div class="card-body">
             <form method="POST" action="{{ route('profile.update') }}" autocomplete="off">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -32,7 +32,16 @@
                                 @foreach ($registros as $registros)
                                 <tr>
                                     <td>{{$registros->fecha}}</td>
-                                    <td>{{$registros->fecha}}</td>
+                                    <td>
+                                        @php
+                                            $numero_dia_semana = date('w', strtotime($registros->fecha));
+                                            $dias_semana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+                                            $nombre_dia_semana = $dias_semana[$numero_dia_semana];
+                                            echo $nombre_dia_semana;
+                                        @endphp
+                                        </td>
+                                    {{-- en la parte de cambio de dias llamamos ala variable
+                                    dias semanas que contiene los dias si es 0 va ser lunes etc, etc --}}
                                     <td>
                                         @php
                                         $en_rango = false;

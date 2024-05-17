@@ -4,47 +4,52 @@
 <div class="col-lg-12 order-lg-1">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Listado de personal&nbsp;&nbsp;<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalusuario">+ Nuevo</button>
+            <h6 class="m-0 font-weight-bold text-primary">Listado de personal&nbsp;&nbsp;<button class="btn btn-success" type="button" data-toggle="modal" data-target="#modalusuario">+ Nuevo</button>
             </h6>
         </div>
+
         <div class="card-body">
-            <form method="POST" action="{{ route('profile.update') }}" autocomplete="off">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="_method" value="PUT">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i
+                        class="fas fa-download fa-sm text-white-50"></i> Generar Reporte</a>
+            </div>
+            <form method="POST" id="search-form" class="form-inline" role="form">
+                <div class="form-group">
+                    <label for="category">Area</label>
+                    <select name="category" id="category" class="custom-select">
+
+                        <option value="reset">-Categoría-</option>
+                        @foreach($area as $datos)
+                            <option value="{{ $datos->id }}">{{ $datos->name }}</option>
+                        @endforeach
+                    </select>
+
+                </div>
+                <button type="submit" class="btn btn-primary">Busqueda</button>
+            </form>
+                </br>
+
                 <div class="pl-lg-4">
                     <div class="row">
                         <div class="table-responsive">
-                            <table id="example" class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre completo</th>
-                                    <th>Nombre de usuario</th>
-                                    <th>Area</th>
-                                    <th>Unidad</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($personal as $datos)
-                                <tr>
-                                    <td>{{$datos->id}}</td>
-                                    <td>{{$datos->name}}</td>
-                                    <td>{{$datos->data}}</td>
-                                    <td>{{$datos->area_name}}</td>
-                                    <td>{{$datos->unidad_name}}</td>
-                                    <td>
-                                        <a href="{{route('personal.lista',$datos->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-fw fa-eye"></i></a>
-                                        <a href="" class="btn btn-warning btn-sm">Editar</a>
-                                        <a href="" class="btn btn-danger btn-sm">Eliminar</a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
+                            <table id="data_personal" class="table table-striped table-bordered lista_personal">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Data</th>
+                                        <th>Área</th>
+                                        <th>Unidad</th>
+                                        <th>opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Aquí se mostrarán los datos de forma dinámica -->
+                                </tbody>
                             </table>
                         </div>
                     </div>
-            </form>
+
         </div>
     </div>
 </div>

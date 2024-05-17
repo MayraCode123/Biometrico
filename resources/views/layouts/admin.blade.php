@@ -16,7 +16,6 @@
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-
     <!-- Styles -->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
@@ -66,6 +65,7 @@
                 <i class="fas fa-fw fa-users"></i>
                 <span>{{ __('Personal') }}</span></a>
         </li>
+
         <li class="nav-item {{ Nav::isRoute('data') }}">
             <a class="nav-link" href="{{ route('data') }}">
                 <i class="fas fa-fw fa-list-check"></i>
@@ -221,6 +221,9 @@
 
 <!-- Carga de tu script personalizado -->
 <script src="{{ asset('js/data-table.js') }}"></script>
+<script src="{{ asset('js/personal.js') }}"></script>
+
+
 <script>
 $(document).ready(function(){
     $('#crearUsuario').submit(function(event){
@@ -240,6 +243,13 @@ $(document).ready(function(){
     });
 });
 </script>
+<script>
 
+        // Script para cambiar el texto del botón a "Buscar" cuando se selecciona un archivo
+        $('#customFile').on('change', function() {
+            var fileName = $(this).val().split('\\').pop();
+            $(this).next('.custom-file-label').html(fileName);
+        });
+</script>
 </body>
 </html>

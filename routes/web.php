@@ -36,7 +36,8 @@ Route::get('/about', function () {
 Route::get('/datos_biometrico','DataController@index')->name('data');
 // personal
 Route::controller(PersonalController::class)->group(function(){
-    Route::get('/personal', 'index')->name('personal');
+    Route::get('/personal/', 'index')->name('personal');
+    Route::get('/personal/listalista_personal_area', 'lista_personal_area')->name('personal.lista_personal_area');
     Route::post('/store','store')->name('personal.store');
     Route::get('/personal_lista/{id}','lista')->name('personal.lista');
 });

@@ -2,7 +2,7 @@ $(document).ready( function () {
     $('#example').DataTable({
         "paging": true,
         "pageLength": 10,
-        "order": [[ 1, 'asc' ]],
+        "order": [[ 0, 'asc' ]],
         responsive:true,
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por paginas",
