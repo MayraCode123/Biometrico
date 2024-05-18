@@ -4,6 +4,10 @@
 <div class="col-lg-12 order-lg-1">
     <div class="card shadow mb-4">
         <dv class="card-header py-3">
+            <div class="d-sm-flex align-items-center justify-content-between">
+                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm ml-auto"><i
+                        class="fas fa-download fa-sm text-white-50"></i> Generar Reporte</a>
+            </div>
             <h5 class="m-0 font-weight-bold text-secondary" style="text-align: center">Reporte Individual</h5>
             <h6 class="m-0 font-weight-bold text-primary">Nombre: {{$persona->name_personal}}</br>
             Cargo:{{$persona->name_cargo}}
@@ -93,29 +97,7 @@
                                         No hay registro
                                     @endif
                                     </td>
-                                    <td>
-                                        @php
-                                        $en_rango = false;
-                                        $horas = []; // Array para almacenar las horas dentro del rango
-                                        @endphp
-                                        @foreach(explode(',', $registros->estados) as $estado)
-                                            @php
-                                            list($hora, $estado_text) = explode(' - ', $estado);
-                                            @endphp
-                                            @if (strtotime($hora) >= strtotime('14:00:00') && strtotime($hora) <= strtotime('15:00:00'))
-                                                @php
-                                                $horas[] = $hora; // Almacenar la hora dentro del rango
-                                                $en_rango = true;
-                                                @endphp
-                                            @endif
-                                        @endforeach
-                                        @if ($en_rango)
-                                            {{ implode(', ', $horas) }} {{-- Mostrar las horas dentro del rango --}}
-                                        @else
-                                            No hay registro
-                                        @endif
-                                    </td>
-                                    <td>
+                                    <td style="@if ($numero_dia_semana == 6) background-color: #F5EDC2; @endif">
                                         @php
                                         $en_rango = false;
                                         $horas = []; // Array para almacenar las horas dentro del rango
@@ -133,10 +115,34 @@
                                         @endforeach
                                         @if ($en_rango)
                                             {{ implode(', ', $horas) }} {{-- Mostrar las horas dentro del rango --}}
-                                        @else
+                                        @elseif ($numero_dia_semana != 6) {{-- Evitar mostrar "No hay registro" si es sábado --}}
                                             No hay registro
                                         @endif
                                     </td>
+
+                                    <td style="@if ($numero_dia_semana == 6) background-color: #F5EDC2; @endif">
+                                        @php
+                                        $en_rango = false;
+                                        $horas = []; // Array para almacenar las horas dentro del rango
+                                        @endphp
+                                        @foreach(explode(',', $registros->estados) as $estado)
+                                            @php
+                                            list($hora, $estado_text) = explode(' - ', $estado);
+                                            @endphp
+                                            @if (strtotime($hora) >= strtotime('18:30:00') && strtotime($hora) <= strtotime('20:00:00'))
+                                                @php
+                                                $horas[] = $hora; // Almacenar la hora dentro del rango
+                                                $en_rango = true;
+                                                @endphp
+                                            @endif
+                                        @endforeach
+                                        @if ($en_rango)
+                                            {{ implode(', ', $horas) }} {{-- Mostrar las horas dentro del rango --}}
+                                        @elseif ($numero_dia_semana != 6) {{-- Evitar mostrar "No hay registro" si es sábado --}}
+                                            No hay registro
+                                        @endif
+                                    </td>
+
                                     <td>En proceso ..</td>
                                 </tr>
                                 @endforeach

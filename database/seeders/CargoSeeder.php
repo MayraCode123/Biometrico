@@ -24,6 +24,26 @@ class CargoSeeder extends Seeder
                 'name' => 'Ejecutivo Contable',
 
             ],
+            [
+                'id' => 3, // Specify unique IDs or use auto-increment
+                'name' => 'Ejecutivo Academico',
+
+            ],
+            [
+                'id' => 4, // Specify unique IDs or use auto-increment
+                'name' => 'Ejecutivo Marketing',
+
+            ],
+            [
+                'id' => 5, // Specify unique IDs or use auto-increment
+                'name' => 'Supervisor Gestion Empresarial',
+
+            ],
+            [
+                'id' => 6, // Specify unique IDs or use auto-increment
+                'name' => 'Supervisor Talento Humano',
+
+            ],
         ];
         DB::table('cargo')->insert($cargo);
     }

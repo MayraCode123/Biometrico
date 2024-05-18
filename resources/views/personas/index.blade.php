@@ -15,17 +15,17 @@
             </div>
             <form method="POST" id="search-form" class="form-inline" role="form">
                 <div class="form-group">
-                    <label for="category">Area</label>
+                    <label for="category">Area&nbsp;</label>
                     <select name="category" id="category" class="custom-select">
 
-                        <option value="reset">-Categoría-</option>
+                        <option value="reset">- AREA -</option>
                         @foreach($area as $datos)
                             <option value="{{ $datos->id }}">{{ $datos->name }}</option>
                         @endforeach
                     </select>
 
                 </div>
-                <button type="submit" class="btn btn-primary">Busqueda</button>
+
             </form>
                 </br>
 
@@ -34,16 +34,16 @@
                         <div class="table-responsive">
                             <table id="data_personal" class="table table-striped table-bordered lista_personal">
                                 <thead>
-                                    <tr>
+                                    <tr style="text-align: center;">
                                         <th>ID</th>
                                         <th>Nombre</th>
-                                        <th>Data</th>
+                                        <th>Nombre de usuario</th>
                                         <th>Área</th>
                                         <th>Unidad</th>
                                         <th>opciones</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody style="text-align: center;">
                                     <!-- Aquí se mostrarán los datos de forma dinámica -->
                                 </tbody>
                             </table>

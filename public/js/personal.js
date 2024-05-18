@@ -38,12 +38,26 @@ $(document).ready( function () {
                             personal.nombre_personal,
                             personal.nombre_usuario,
                             personal.area_nombre,
-                            personal.unidad_nombre
+                            personal.unidad_nombre,
+                            '<button class="btn btn-sm btn-primary edit-btn" data-id="' + personal.id + '">Editar</button>' +
+                            '<button class="btn btn-sm btn-info view-btn" data-id="' + personal.id + '">Visualizar</button>'
                         ]).draw();
                     });
                 }
             });
         }
+    });
+    $('#data_personal tbody').on('click', '.view-btn', function () {
+        var personalId = $(this).data('id');
+        // Redirection to a new page with the personal ID
+        window.location.href = '/personal_lista/' + personalId;
+        //window.location.href = '/personal/detalle_personal?id=' + personalId;
+    });
+    $('#data_personal tbody').on('click', '.edit-btn', function () {
+        var personalId = $(this).data('id');
+        // Redirection to a new page with the personal ID
+        alert(personalId)
+        //window.location.href = '/personal/detalle_personal?id=' + personalId;
     });
 
 } );
