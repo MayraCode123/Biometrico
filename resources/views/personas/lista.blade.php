@@ -43,7 +43,7 @@
                                             $nombre_dia_semana = $dias_semana[$numero_dia_semana];
                                             echo $nombre_dia_semana;
                                         @endphp
-                                        </td>
+                                    </td>
                                     {{-- en la parte de cambio de dias llamamos ala variable
                                     dias semanas que contiene los dias si es 0 va ser lunes etc, etc --}}
                                     <td>
@@ -68,13 +68,14 @@
                                             No hay registro
                                         @endif
                                     </td>
-                                    <td>    @php
+                                    <td>
+                                        @php
                                         $en_rango = false;
                                         $horas = []; // Array para almacenar las horas dentro del rango
                                         $hora_fuera_de_rango = null; // Variable para almacenar la primera hora fuera del rango
                                         $hora_salida = null; // Variable para almacenar la hora de salida si está fuera del rango
-                                    @endphp
-                                    @foreach(explode(',', $registros->estados) as $estado)
+                                        @endphp
+                                        @foreach(explode(',', $registros->estados) as $estado)
                                         @php
                                             list($hora, $estado_text) = explode(' - ', $estado);
                                             if (strtotime($hora) >= strtotime('12:00:00') && strtotime($hora) <= strtotime('14:00:00')) {
@@ -86,16 +87,16 @@
                                                 $hora_fuera_de_rango = $hora; // Almacenar la primera hora fuera del rango
                                             }
                                         @endphp
-                                    @endforeach
+                                        @endforeach
 
-                                    @if ($en_rango)
-                                        {{ implode(', ', $horas) }} {{-- Mostrar las horas dentro del rango --}}
-                                    @elseif ($hora_salida)
-                                    <span class="badge badge-danger">{{ $hora_salida }}</span>  {{-- Mostrar la hora de salida en rojo --}}
+                                        @if ($en_rango)
+                                            {{ implode(', ', $horas) }} {{-- Mostrar las horas dentro del rango --}}
+                                        @elseif ($hora_salida)
+                                        <span class="badge badge-danger">{{ $hora_salida }}</span>  {{-- Mostrar la hora de salida en rojo --}}
 
-                                    @else
-                                        No hay registro
-                                    @endif
+                                        @else
+                                            No hay registro
+                                        @endif
                                     </td>
                                     <td style="@if ($numero_dia_semana == 6) background-color: #F5EDC2; @endif">
                                         @php
@@ -106,7 +107,7 @@
                                             @php
                                             list($hora, $estado_text) = explode(' - ', $estado);
                                             @endphp
-                                            @if (strtotime($hora) >= strtotime('18:30:00') && strtotime($hora) <= strtotime('20:00:00'))
+                                            @if (strtotime($hora) >= strtotime('14:00:00') && strtotime($hora) <= strtotime('15:00:00'))
                                                 @php
                                                 $horas[] = $hora; // Almacenar la hora dentro del rango
                                                 $en_rango = true;
@@ -115,7 +116,7 @@
                                         @endforeach
                                         @if ($en_rango)
                                             {{ implode(', ', $horas) }} {{-- Mostrar las horas dentro del rango --}}
-                                        @elseif ($numero_dia_semana != 6) {{-- Evitar mostrar "No hay registro" si es sábado --}}
+                                        @else
                                             No hay registro
                                         @endif
                                     </td>
@@ -129,7 +130,7 @@
                                             @php
                                             list($hora, $estado_text) = explode(' - ', $estado);
                                             @endphp
-                                            @if (strtotime($hora) >= strtotime('18:30:00') && strtotime($hora) <= strtotime('20:00:00'))
+                                            @if (strtotime($hora) >= strtotime('18:00:00') && strtotime($hora) <= strtotime('20:00:00'))
                                                 @php
                                                 $horas[] = $hora; // Almacenar la hora dentro del rango
                                                 $en_rango = true;
@@ -138,11 +139,10 @@
                                         @endforeach
                                         @if ($en_rango)
                                             {{ implode(', ', $horas) }} {{-- Mostrar las horas dentro del rango --}}
-                                        @elseif ($numero_dia_semana != 6) {{-- Evitar mostrar "No hay registro" si es sábado --}}
+                                        @else
                                             No hay registro
                                         @endif
                                     </td>
-
                                     <td>En proceso ..</td>
                                 </tr>
                                 @endforeach

@@ -64,68 +64,6 @@ class HorarioController extends Controller
 
 
 
-    //     $datos = DB::table('data')
-    //     ->join('data_horario', 'data.id_biometrico', '=', 'data_horario.data_id_biometrico')
-    //     ->join('horario', 'horario.id', '=', 'data_horario.horario_id')
-    //     ->select(
-    //         'horario.name as nombre_de_horario',
-    //         'horario.hr_entrada as hora_de_entrada',
-    //         'horario.hr_salida as hora_de_salida',
-    //         'horario.hr_entrada_min_tolerancia as horario_tolerancia',
-    //         'horario.min_hr_entrada as min_antes_entrada',
-    //         'horario.hr_min_salida as min_despues_salida',
-    //         'data.state as estado',
-    //         'data.name as nombre',
-    //         DB::raw('TIME(data.time) as hora_biometrica')
-    //     )
-    //     ->where(function($query) {
-    //         $query->where('data.state', '=', 'Entrada')
-    //             ->whereRaw('TIME(data.time) >= horario.min_hr_entrada')
-    //             ->whereRaw('TIME(data.time) <= horario.hr_entrada');
-
-    //     })
-    //     ->orWhere(function($query) {
-    //         $query->where('data.state', '=', 'Salida')
-    //             ->whereRaw('TIME(data.time) >= horario.hr_salida')
-    //             ->whereRaw('TIME(data.time) <= horario.hr_min_salida');
-    //     })
-    //     ->get();
-
-    // $registros = [];
-
-    // foreach ($datos as $dato) {
-    //     $registro = [
-    //         'nombre_de_horario' => $dato->nombre_de_horario,
-    //         'hora_de_entrada' => $dato->hora_de_entrada,
-    //         'hora_de_salida' => $dato->hora_de_salida,
-    //         'nombre' => $dato->nombre,
-    //         'estado' => $dato->estado,
-    //         'hora_biometrica' => $dato->hora_biometrica,
-    //         'fecha_entrada' => null,
-    //         'fecha_salida' => null
-    //     ];
-
-    //     if ($dato->estado == 'Entrada') {
-    //         $registro['fecha_entrada'] = $dato->hora_biometrica;
-    //     } elseif ($dato->estado == 'Salida') {
-    //         $registro['fecha_salida'] = $dato->hora_biometrica;
-    //     }
-
-    //     // Buscar la entrada correspondiente para establecer la salida
-    //     if ($dato->estado == 'Salida') {
-    //         foreach ($registros as $registro_entrada) {
-    //             if ($registro_entrada['nombre_de_horario'] === $dato->nombre_de_horario &&
-    //                 $registro_entrada['nombre'] === $dato->nombre &&
-    //                 $registro_entrada['fecha_entrada'] === null) {
-    //                 $registro_entrada['fecha_salida'] = $dato->hora_biometrica;
-    //                 break;
-    //             }
-    //         }
-    //     }
-
-    //     $registros[] = $registro;
-    // }
-
     //return view('Horario.index',compact('registros'));
     }
     public function procesoCheck(){

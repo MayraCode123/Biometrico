@@ -68,25 +68,43 @@ class PersonalController extends Controller
         ->select('personal.id as id','cargo.name as name_cargo','personal.name as name_personal')
         ->where('personal.id', $id)
         ->first();
-
         $registros = DB::table('personal')
-        ->join('data_personal', 'data_personal.data_id_biometrico', '=', 'personal.data_personal_id')
-        ->join('data', 'data.id_biometrico', '=', 'data_personal.data_id_biometrico')
-        ->selectRaw('DATE(data.time) as fecha, data.name as nombre_usuario,
-        GROUP_CONCAT(CONCAT(TIME(data.time), " - ", data.state)
-        ORDER BY TIME(data.time)) as estados')
-        ->where('personal.id', $id)
-        ->groupBy('fecha','nombre_usuario')
-        ->orderByRaw("DATE_FORMAT(fecha, '%d')")
-        ->get();
+    ->join('data_personal', 'data_personal.data_id_biometrico', '=', 'personal.data_personal_id')
+    ->join('data', 'data.id_biometrico', '=', 'data_personal.data_id_biometrico')
+    ->join('data_horario', 'data.id_biometrico', '=', 'data_horario.data_id_biometrico')
+    ->join('horario', 'horario.id', '=', 'data_horario.horario_id')
+    ->selectRaw('DATE(data.time) as fecha, data.name as nombre_usuario,
+        GROUP_CONCAT(DISTINCT CONCAT(TIME(data.time), " - ", data.state)
+        ORDER BY TIME(data.time) SEPARATOR ", ") as estados')
+    ->where('personal.id', $id)
+    ->groupBy('fecha', 'nombre_usuario')
+    ->get();
 
-        // $check = DB::table('data')
-        // ->join('data_horario','data.id_biometrico','=','data.id')
-        // ->join('horario','horario.id','data_horario.horario_id')
+        // $registros = DB::table('personal')
+        // ->join('data_personal', 'data_personal.data_id_biometrico', '=', 'personal.data_personal_id')
+        // ->join('data', 'data.id_biometrico', '=', 'data_personal.data_id_biometrico')
+        // ->join('data_horario', 'data.id_biometrico', '=', 'data_horario.data_id_biometrico')
+        // ->join('horario','horario.id','=','data_horario.horario_id')
+        // ->selectRaw('DATE(data.time) as fecha, data.name as nombre_usuario,
+        // GROUP_CONCAT(CONCAT(TIME(data.time), " - ", data.state)
+        // ORDER BY TIME(data.time)) as estados')
+        // ->where('personal.id', $id)
+
+        // ->groupBy('fecha','nombre_usuario')
+        // ->orderByRaw("DATE_FORMAT(fecha, '%d')")
         // ->get();
 
-        // $registrosAgrupadosArray = $persona->toArray();
+        // $check = DB::table('personal')
+        // ->join('data_personal','data_personal.id','=','personal.data_personal_id')
+        // ->join('data','data.id_biometrico','=','data_personal.data_id_biometrico')
+        // ->where('personal.id',$id)
+        // ->first();
+        // dd($check);
+        // $registrosAgrupadosArray = $check->toArray();
         // return response()->json($registrosAgrupadosArray);
-        return view('personas.lista',compact('registros','persona'));
+       return view('personas.lista',compact('registros','persona'));
+    }
+    public function check_personal(){
+
     }
 }
