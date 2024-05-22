@@ -34,6 +34,21 @@ class data_horarioSeeder extends Seeder
                 'data_id_biometrico' => 5,
                 'horario_id' => 2,
             ],
+            [
+                'id' => 5, // Cambia el valor de id para que sea único
+                'data_id_biometrico' => 6,
+                'horario_id' => 4,
+            ],
+            [
+                'id' => 6, // Cambia el valor de id para que sea único
+                'data_id_biometrico' => 6,
+                'horario_id' => 3,
+            ],
+            [
+                'id' => 7, // Cambia el valor de id para que sea único
+                'data_id_biometrico' => 6,
+                'horario_id' => 1,
+            ],
 
         ];
         DB::table('data_horario')->insert($data_horario);

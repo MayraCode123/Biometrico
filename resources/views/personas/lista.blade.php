@@ -143,7 +143,9 @@
                                             No hay registro
                                         @endif
                                     </td>
-                                    <td>En proceso ..</td>
+                                    <td>
+                                        12
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

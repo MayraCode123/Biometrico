@@ -46,6 +46,17 @@ class HorarioSeeder extends Seeder
             'hr_min_salida'=> '15:00:00',
 
         ],
+        [
+            'id' => 4, // Specify unique IDs or use auto-increment
+            'name' => 'turno noche',
+            'min_hr_entrada' => '15:00:00',
+            'hr_entrada' => '16:00:00',
+            'hr_entrada_min_tolerancia' => '16:10:00',
+            'hr_entrada_min_retraso'=> '16:11:00',
+            'hr_salida'=> '20:00:00',
+            'hr_min_salida'=> '22:00:00',
+
+        ]
     ];
     DB::table('horario')->insert($horarios);
 

@@ -39,8 +39,8 @@ $(document).ready( function () {
                             personal.nombre_usuario,
                             personal.area_nombre,
                             personal.unidad_nombre,
-                            '<button class="btn btn-sm btn-primary edit-btn" data-id="' + personal.id + '">Editar</button>' +
-                            '<button class="btn btn-sm btn-info view-btn" data-id="' + personal.id + '">Visualizar</button>'
+                            // '<button class="btn btn-sm btn-primary edit-btn" data-id="' + personal.id + '">Editar</button>' +
+                            '<button class="btn btn-sm btn-info view-btn" data-id="' + personal.id + '"><i class="fas fa-fw fa-eye"></i></button>'
                         ]).draw();
                     });
                 }
