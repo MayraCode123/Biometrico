@@ -83,73 +83,96 @@ class PersonalController extends Controller
         ->groupBy(DB::raw('DATE(data.time)'), 'data.name')
         ->get();
 
-    // Procesamiento adicional para agregar la variable de horario
-    foreach ($registros as $registro) {
-        // Obtener la hora de entrada y salida de la mañana y la tarde
-        $hora_entrada_manana = strtotime('07:00:00');
-        $hora_salida_manana = strtotime('09:00:00');
-        $hora_entrada_tarde = strtotime('09:00:01');
-        $hora_salida_tarde = strtotime('13:59:00');
 
-        // Obtener la hora del registro actual
-        $hora_registro = strtotime(substr($registro->estados, 0, 8));
+        return view('personas.lista', [
+            'persona' => $persona,
+            'registros' => $registros,
 
-        // Determinar si el registro es de mañana o de tarde
-        if ($hora_registro >= $hora_entrada_manana && $hora_registro <= $hora_salida_manana) {
-            $registro->horario = 'manana_entrada';
-        } elseif ($hora_registro >= $hora_entrada_tarde && $hora_registro <= $hora_salida_tarde) {
-            $registro->horario = 'manana_salida';
-        } else {
-            $registro->horario = 'otro';
-        }
+
+        ]);
+
     }
-        $registrosAgrupadosArray = $registros->toArray();
-        return response()->json($registrosAgrupadosArray);
+
+    public function area_personal(Request $request){
+        $data = DB::table('personal')
+        ->join('area','area.id','=','personal.area_id')
+        ->get();
+        return response()->json($data);
+
+    }
+    public function direccion_personal($id){
+        $persona = DB::table('personal')
+        ->join('cargo','cargo.id','=','personal.cargo_id')
+        ->select('personal.id as id','cargo.name as name_cargo','personal.name as name_personal')
+        ->where('personal.id', $id)
+        ->first();
+
+        $registros = DB::table('personal')
+        ->join('data_personal', 'personal.data_personal_id', '=', 'data_personal.data_id_biometrico')
+        ->join('data', 'data_personal.data_id_biometrico', '=', 'data.id_biometrico')
+        ->join('data_horario', 'data.id_biometrico', '=', 'data_horario.data_id_biometrico')
+        ->join('horario', 'horario.id', '=', 'data_horario.horario_id')
+        ->select(
+            DB::raw('DATE(data.time) as fecha'),
+            'data.name as nombre_usuario',
+            DB::raw('GROUP_CONCAT(DISTINCT CONCAT(TIME(data.time), " - ", data.state) ORDER BY TIME(data.time) SEPARATOR ", ") as estados')
+        )
+        ->where('personal.id', $id)
+        ->groupBy(DB::raw('DATE(data.time)'), 'data.name')
+        ->get();
+        // return response()->json($registros);
+
+        return view('area_personal.direccion', [
+            'persona' => $persona,
+            'registros' => $registros,
+        ]);
 
 
-        // $clasificaciones = [];
+    }
+    public function marketing_personal($id){
+        $persona = DB::table('personal')
+        ->join('cargo','cargo.id','=','personal.cargo_id')
+        ->select('personal.id as id','cargo.name as name_cargo','personal.name as name_personal')
+        ->where('personal.id', $id)
+        ->first();
+        return view('area_personal.marketing',compact('persona'));
+    }
+    public function academicos_personal($id){
+        $persona = DB::table('personal')
+        ->join('cargo','cargo.id','=','personal.cargo_id')
+        ->select('personal.id as id','cargo.name as name_cargo','personal.name as name_personal')
+        ->where('personal.id', $id)
+        ->first();
+        return view('area_personal.academicos',compact('persona'));
+    }
+    public function ti_personal($id){
+        $persona = DB::table('personal')
+        ->join('cargo','cargo.id','=','personal.cargo_id')
+        ->select('personal.id as id','cargo.name as name_cargo','personal.name as name_personal')
+        ->where('personal.id', $id)
+        ->first();
 
-        // foreach ($registros as $registro) {
-        //     $registro->fecha = date('Y-m-d', strtotime($registro->fecha));
+        $registros = DB::table('personal')
+        ->join('data_personal', 'personal.data_personal_id', '=', 'data_personal.data_id_biometrico')
+        ->join('data', 'data_personal.data_id_biometrico', '=', 'data.id_biometrico')
+        ->join('data_horario', 'data.id_biometrico', '=', 'data_horario.data_id_biometrico')
+        ->join('horario', 'horario.id', '=', 'data_horario.horario_id')
+        ->select(
+            DB::raw('DATE(data.time) as fecha'),
+            'data.name as nombre_usuario',
+            DB::raw('GROUP_CONCAT(DISTINCT CONCAT(TIME(data.time), " - ", data.state) ORDER BY TIME(data.time) SEPARATOR ", ") as estados')
+        )
+        ->where('personal.id', $id)
+        ->groupBy(DB::raw('DATE(data.time)'), 'data.name')
+        ->get();
+        // return response()->json($registros);
 
-        //     // Obtener las horas de los estados
-        //     $estados = explode(', ', $registro->estados);
-        //     $turnos = [
-        //         'mañana_antes_8' => [],
-        //         'mañana_7_a_9' => [],
-        //         'mañana_despues_9' => [],
-        //         'tarde' => []
-        //     ];
+        return view('area_personal.ti', [
+            'persona' => $persona,
+            'registros' => $registros,
+        ]);
 
-        //     foreach ($estados as $estado) {
-        //         list($time, $state) = explode(' - ', $estado);
-        //         $time = strtotime($time);
 
-        //         if ($time >= strtotime('07:00:00') && $time < strtotime('08:00:00')) {
-        //             $turnos['mañana_antes_8'][] = $estado;
-        //         } elseif ($time >= strtotime('07:00:00') && $time < strtotime('09:00:00')) {
-        //             $turnos['mañana_7_a_9'][] = $estado;
-        //         } elseif ($time >= strtotime('09:00:00') && $time < strtotime('13:00:00')) {
-        //             $turnos['mañana_despues_9'][] = $estado;
-        //         } elseif ($time >= strtotime('14:00:00') && $time < strtotime('22:00:00')) {
-        //             $turnos['tarde'][] = $estado;
-        //         }
-        //             }
-
-        //             // Agregar los turnos clasificados al arreglo de clasificaciones
-        //             $clasificaciones[] = [
-        //                 'fecha' => $registro->fecha,
-        //                 'nombre_usuario' => $registro->nombre_usuario,
-        //                 'turnos' => $turnos
-        //             ];
-        //         }
-
-        // return view('personas.lista', [
-        //     'persona' => $persona,
-        //     'registros' => $registros,
-        //     'clasificaciones' => $clasificaciones,
-
-        // ]);
     }
 
 }

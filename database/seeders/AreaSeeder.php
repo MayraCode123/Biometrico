@@ -17,9 +17,9 @@ class AreaSeeder extends Seeder
     {
         DB::table('area')->insert([
             ['name' => 'Marketing'],
-            ['name' => 'Académicos'],
-            ['name' => 'Dirección'],
-            ['name' => 'TI'],
+            ['name' => 'Academicos'],
+            ['name' => 'Direccion'],
+            ['name' => 'Ti'],
         ]);
     }
 }

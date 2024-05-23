@@ -48,16 +48,24 @@ $(document).ready( function () {
         }
     });
     $('#data_personal tbody').on('click', '.view-btn', function () {
-        var personalId = $(this).data('id');
-        // Redirection to a new page with the personal ID
-        window.location.href = '/personal_lista/' + personalId;
-        //window.location.href = '/personal/detalle_personal?id=' + personalId;
-    });
-    $('#data_personal tbody').on('click', '.edit-btn', function () {
-        var personalId = $(this).data('id');
-        // Redirection to a new page with the personal ID
-        alert(personalId)
-        //window.location.href = '/personal/detalle_personal?id=' + personalId;
+        var rowData = table.row($(this).parents('tr')).data(); // Obtener los datos de la fila actual
+        var personalId = rowData[0]; // Suponiendo que la primera columna contiene el ID del personal
+        var areaId = rowData[3]; // Suponiendo que la cuarta columna contiene el nombre del área
+
+        console.log('Personal ID:', personalId); // Depuración
+        console.log('Area ID:', areaId); // Depuración
+
+        if (areaId.toLowerCase() === 'direccion') {
+            window.location.href = '/personal/direccion/' + personalId;
+        } else if (areaId.toLowerCase() === 'marketing') {
+            window.location.href = '/personal/marketing/' + personalId;
+        } else if (areaId.toLowerCase() === 'ti') {
+            window.location.href = '/personal/ti/' + personalId;
+        } else if (areaId.toLowerCase() === 'academicos') {
+            window.location.href = '/personal/academicos/' + personalId;
+        } else {
+            window.location.href = '/personal/general/' + personalId;
+        }
     });
 
 } );
