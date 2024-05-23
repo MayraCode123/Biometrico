@@ -165,7 +165,6 @@ class PersonalController extends Controller
         ->where('personal.id', $id)
         ->groupBy(DB::raw('DATE(data.time)'), 'data.name')
         ->get();
-        // return response()->json($registros);
 
         return view('area_personal.ti', [
             'persona' => $persona,

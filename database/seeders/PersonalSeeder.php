@@ -38,6 +38,22 @@ class PersonalSeeder extends Seeder
                 'data_personal_id' => 6,
                 'cargo_id' => 4
             ],
+            [
+                'id' => 4, // Specify unique IDs or use auto-increment
+                'name' => 'Gustavo Torrico',
+                'area_id' => 3,
+                'unidad_id' => 2,
+                'data_personal_id' => 8,
+                'cargo_id' => 5
+            ],
+            [
+                'id' => 5, // Specify unique IDs or use auto-increment
+                'name' => 'Andrea Wendy Caballero',
+                'area_id' => 3,
+                'unidad_id' => 2,
+                'data_personal_id' => 43,
+                'cargo_id' => 5
+            ],
         ];
         DB::table('personal')->insert($personal);
 
